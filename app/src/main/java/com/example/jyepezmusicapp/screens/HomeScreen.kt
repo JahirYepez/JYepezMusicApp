@@ -1,15 +1,23 @@
 package com.example.jyepezmusicapp.screens
 
 import android.util.Log
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.jyepezmusicapp.models.Album
 import com.example.jyepezmusicapp.services.AlbumService
+import com.example.jyepezmusicapp.ui.theme.HomeBackgroundGradiant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import okhttp3.Dispatcher
@@ -44,6 +52,24 @@ fun HomeScreen(
         catch (e: Exception) {
             loading = false
             Log.e("HomeScreen", e.toString())
+        }
+    }
+    if (loading){
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator()
+        }
+    }
+    else {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(HomeBackgroundGradiant)
+        ) {
+
         }
     }
 }
