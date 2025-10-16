@@ -20,4 +20,6 @@ val HomeBackgroundGradiant = Brush.verticalGradient(
         Color(0xFFFF8AE5),
         Color(0xFFFF8EFF)
     )
+
+//greeting
 )
