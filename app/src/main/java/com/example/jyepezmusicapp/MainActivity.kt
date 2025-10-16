@@ -14,7 +14,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import com.example.jyepezmusicapp.screens.AlbumDetailScreen
 import com.example.jyepezmusicapp.screens.HomeScreen
+import com.example.jyepezmusicapp.ui.theme.AlbumDetailScreenRoute
 import com.example.jyepezmusicapp.ui.theme.HomeScreenRoute
 import com.example.jyepezmusicapp.ui.theme.JYepezMusicAppTheme
 
@@ -34,6 +37,10 @@ class MainActivity : ComponentActivity() {
                             HomeScreen(
                                 navController
                             )
+                        }
+                        composable<AlbumDetailScreenRoute> {backStack ->
+                            val args = backStack.toRoute<AlbumDetailScreenRoute>()
+                            AlbumDetailScreen(args.id, navController = navController)
                         }
                     }
                 }

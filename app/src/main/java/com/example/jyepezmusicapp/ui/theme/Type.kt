@@ -30,4 +30,14 @@ val rubikTypo = Typography(
     // buenosDias
 
     // nombre
+
+    // album
+
+    // see more
+
+    // album.title
+
+    // album.artist
+
+
 )

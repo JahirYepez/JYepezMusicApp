@@ -24,6 +24,7 @@ import com.example.jyepezmusicapp.components.Albums
 import com.example.jyepezmusicapp.components.Greeting
 import com.example.jyepezmusicapp.models.Album
 import com.example.jyepezmusicapp.services.AlbumService
+import com.example.jyepezmusicapp.ui.theme.AlbumDetailScreenRoute
 import com.example.jyepezmusicapp.ui.theme.HomeBackgroundGradiant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -94,9 +95,14 @@ fun HomeScreen(
             Column(
                 modifier = Modifier
                     .weight(5f)
-                    //.padding(10.dp)
+                    .padding(vertical = 8.dp)
             ) {
-                Albums()
+                Albums(
+                    albums = albums,
+                    onAlbumClick = { album ->
+                        navController.navigate(AlbumDetailScreenRoute(album.id.toString()))
+                    }
+                )
             }
         }
     }
