@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -15,8 +16,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.jyepezmusicapp.components.Albums
+import com.example.jyepezmusicapp.components.Greeting
 import com.example.jyepezmusicapp.models.Album
 import com.example.jyepezmusicapp.services.AlbumService
 import com.example.jyepezmusicapp.ui.theme.HomeBackgroundGradiant
@@ -72,10 +77,27 @@ fun HomeScreen(
                 .background(HomeBackgroundGradiant)
                 .padding(
                     horizontal = 20.dp,
-                    vertical = 45.dp
+                    vertical = 35.dp
                 )
         ) {
-            //GOOD MORNING
+            Column(
+                modifier = Modifier
+                    .weight(3f)
+                    //.padding(horizontal = 10.dp)
+                    .clip(RoundedCornerShape(20.dp))
+                    // COLOR GREETING -------
+                    .background(Color.Red)
+            ) {
+                Greeting()
+            }
+            //
+            Column(
+                modifier = Modifier
+                    .weight(5f)
+                    //.padding(10.dp)
+            ) {
+                Albums()
+            }
         }
     }
 }
