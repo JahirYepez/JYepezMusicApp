@@ -52,7 +52,7 @@ fun JYepezMusicAppTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = rubikTypo,
         content = content
     )
 }
