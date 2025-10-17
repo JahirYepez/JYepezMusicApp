@@ -39,7 +39,7 @@ fun AlbumCardRowBox(
             .size(230.dp)
             .padding(end = 10.dp)
             .clip(RoundedCornerShape(30.dp))
-            .background(Color.Yellow)
+            .background(Color.White)
             .clickable{
                 onClick()
             }

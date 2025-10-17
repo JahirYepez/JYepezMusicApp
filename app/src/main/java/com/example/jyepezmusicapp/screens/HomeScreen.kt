@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.jyepezmusicapp.components.Albums
 import com.example.jyepezmusicapp.components.Greeting
+import com.example.jyepezmusicapp.components.RecentlyPlayed
 import com.example.jyepezmusicapp.models.Album
 import com.example.jyepezmusicapp.services.AlbumService
 import com.example.jyepezmusicapp.ui.theme.AlbumDetailScreenRoute
@@ -81,9 +83,10 @@ fun HomeScreen(
                     vertical = 35.dp
                 )
         ) {
+            // GREETING
             Column(
                 modifier = Modifier
-                    .weight(3f)
+                    .weight(2f)
                     //.padding(horizontal = 10.dp)
                     .clip(RoundedCornerShape(20.dp))
                     // COLOR GREETING -------
@@ -91,13 +94,26 @@ fun HomeScreen(
             ) {
                 Greeting()
             }
-            //
+            // LAZYROW
             Column(
                 modifier = Modifier
-                    .weight(5f)
-                    .padding(vertical = 8.dp)
+                    .weight(4f)
+                    .padding(top = 8.dp)
             ) {
                 Albums(
+                    albums = albums,
+                    onAlbumClick = { album ->
+                        navController.navigate(AlbumDetailScreenRoute(album.id.toString()))
+                    }
+                )
+            }
+            // LAZY COLUMN
+            Column(
+                modifier = Modifier
+                    .weight(6f)
+                    //.padding(top = 8.dp)
+            ) {
+                RecentlyPlayed(
                     albums = albums,
                     onAlbumClick = { album ->
                         navController.navigate(AlbumDetailScreenRoute(album.id.toString()))

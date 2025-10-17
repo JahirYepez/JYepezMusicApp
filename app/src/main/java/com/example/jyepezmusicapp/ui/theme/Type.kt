@@ -31,7 +31,7 @@ val rubikTypo = Typography(
 
     // nombre
 
-    // album
+    // album / recently played
 
     // see more
 
