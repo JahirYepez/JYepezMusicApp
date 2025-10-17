@@ -24,6 +24,7 @@ import androidx.navigation.NavController
 import com.example.jyepezmusicapp.components.Albums
 import com.example.jyepezmusicapp.components.Greeting
 import com.example.jyepezmusicapp.components.RecentlyPlayed
+import com.example.jyepezmusicapp.components.Reproductor
 import com.example.jyepezmusicapp.models.Album
 import com.example.jyepezmusicapp.services.AlbumService
 import com.example.jyepezmusicapp.ui.theme.AlbumDetailScreenRoute
@@ -44,6 +45,9 @@ fun HomeScreen(
     var loading by remember {
         mutableStateOf(true)
     }
+    var albumAleatorio by remember {
+        mutableStateOf<Album?>(null)
+    }
     LaunchedEffect(true) {
         try {
             val retrofit = Retrofit
@@ -62,6 +66,11 @@ fun HomeScreen(
         catch (e: Exception) {
             loading = false
             Log.e("HomeScreen", e.toString())
+        }
+    }
+    LaunchedEffect(albums) {
+        if (albums.isNotEmpty() && albumAleatorio == null) {
+            albumAleatorio = albums.random() // Elige un album aleatorio para el reproductor
         }
     }
     if (loading){
@@ -107,18 +116,33 @@ fun HomeScreen(
                     }
                 )
             }
-            // LAZY COLUMN
-            Column(
-                modifier = Modifier
-                    .weight(6f)
-                    //.padding(top = 8.dp)
-            ) {
-                RecentlyPlayed(
-                    albums = albums,
-                    onAlbumClick = { album ->
-                        navController.navigate(AlbumDetailScreenRoute(album.id.toString()))
+            /*
+                LA ULTIMA SECCION DE LAZY COLUMN LO METI EN UN SOLO BOX
+                ESTO PARA MANTENER FIJO EL REPRODUCTOR, NO ME AGRADA
+                COMPLETAMENTE, YA QUE ME DA "TOC" TENER EL GREETING Y EL
+                LA SECCION DE ALBUMS (CON LAZY ROW) FUERA DEL BOX, PENSARIA
+                EXISTE OTRA MANERA MAS LIMPIA DE INTEGRAR LO DEMAS.
+             */
+            Box(
+                modifier = Modifier.weight(6f)
+            ){
+                Column() {
+                    RecentlyPlayed(
+                        albums = albums,
+                        onAlbumClick = { album ->
+                            navController.navigate(AlbumDetailScreenRoute(album.id.toString()))
+                        }
+                    )
+                }
+                // Reproductor
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                ) {
+                    albumAleatorio?.let { alb ->
+                        Reproductor(album = alb)
                     }
-                )
+                }
             }
         }
     }
