@@ -22,12 +22,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.jyepezmusicapp.models.Album
+import com.example.jyepezmusicapp.ui.theme.rubikFontFamily
+import com.example.jyepezmusicapp.ui.theme.rubikTextStyles
 
 @Composable
 fun AlbumCardRowBox(
@@ -39,6 +42,7 @@ fun AlbumCardRowBox(
             .size(230.dp)
             .padding(end = 10.dp)
             .clip(RoundedCornerShape(30.dp))
+            .shadow(15.dp)
             .background(Color.White)
             .clickable{
                 onClick()
@@ -61,7 +65,7 @@ fun AlbumCardRowBox(
                     .fillMaxWidth()
                     .padding(20.dp)
                     .clip(RoundedCornerShape(20.dp))
-                    .background(Color.White.copy(0.4f))
+                    .background(Color.White.copy(0.75f))
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth()
@@ -73,17 +77,15 @@ fun AlbumCardRowBox(
                     ) {
                         Text(
                             text = album.title,
-                            color = Color.White,
                             maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                            // STYLLE
+                            overflow = TextOverflow.Ellipsis,
+                            style = rubikTextStyles.titleCardRow
                         )
                         Text(
                             text = album.artist,
-                            color = Color.White,
                             maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                            // STYLE
+                            overflow = TextOverflow.Ellipsis,
+                            style = rubikTextStyles.artistCardRow
                         )
                     }
                     Box(

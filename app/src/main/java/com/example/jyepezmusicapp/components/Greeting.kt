@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.jyepezmusicapp.ui.theme.rubikTextStyles
 
 @Composable
 fun Greeting(){
@@ -53,13 +54,13 @@ fun Greeting(){
     Text(
         modifier = Modifier.padding(horizontal = 15.dp),
         text = "Buenos días!",
-        color = Color.White
-        // STYLE BUENOS DIAS
+        color = Color.White,
+        style = rubikTextStyles.goodMorning
     )
     Text(
         modifier = Modifier.padding(horizontal = 15.dp),
         text = "Jahir Yépez",
-        color = Color.White
-        // STYLE NOMBRE
+        color = Color.White,
+        style = rubikTextStyles.name
     )
 }

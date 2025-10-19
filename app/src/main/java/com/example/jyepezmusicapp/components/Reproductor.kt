@@ -25,6 +25,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.jyepezmusicapp.models.Album
+import com.example.jyepezmusicapp.ui.theme.rubikTextStyles
 
 @Composable
 fun Reproductor(album: Album){
@@ -59,13 +60,11 @@ fun Reproductor(album: Album){
         ) {
             Text(
                 text = album.title,
-                color = Color.White,
-                // STYLE
+                style = rubikTextStyles.titlePlayer
             )
             Text(
                 text = album.artist,
-                color = Color.White
-                // STYLE
+                style = rubikTextStyles.artistPlayer
             )
         }
         Box(

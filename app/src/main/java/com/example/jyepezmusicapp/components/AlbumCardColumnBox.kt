@@ -20,23 +20,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.jyepezmusicapp.models.Album
+import com.example.jyepezmusicapp.ui.theme.rubikTextStyles
 
 @Composable
 fun AlbumCardColumnBox(
     album: Album,
     onClick :() -> Unit
 ){
+    val shape = RoundedCornerShape(20.dp)
     Row(
         modifier = Modifier
             .padding(bottom = 15.dp)
             .fillMaxWidth()
             .height(90.dp)
-            .clip(RoundedCornerShape(20.dp))
+            .shadow(30.dp, shape)
+            .clip(shape)
             .background(Color.White)
             .clickable{
                 onClick()
@@ -66,14 +70,13 @@ fun AlbumCardColumnBox(
         ) {
             Text(
                 text = album.title,
-                color = Color.Black,
-                // STYLE
+                style = rubikTextStyles.titleCardColumn,
+                modifier = Modifier.padding(vertical = 4.dp)
             )
             Text(
                 text = "${album.artist} • ${album.description ?: ' '}",
-                color = Color.Black,
-                maxLines = 1
-                // STYLE
+                maxLines = 1,
+                style = rubikTextStyles.artistCardColumn
             )
         }
         Icon(

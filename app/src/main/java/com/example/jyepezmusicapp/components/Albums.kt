@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.jyepezmusicapp.models.Album
+import com.example.jyepezmusicapp.ui.theme.rubikTextStyles
 
 @Composable
 fun Albums(
@@ -32,13 +33,11 @@ fun Albums(
     ) {
         Text(
             text = "Albums",
-            color = Color.White
-            //Style
+            style = rubikTextStyles.albumsRecently
         )
         Text(
             text = "See more...",
-            color = Color.White
-            //Style
+            style = rubikTextStyles.seeMore
         )
     }
     LazyRow(

@@ -1,5 +1,6 @@
 package com.example.jyepezmusicapp.screens
 
+import android.R
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -18,6 +19,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -97,9 +100,18 @@ fun HomeScreen(
                 modifier = Modifier
                     .weight(2f)
                     //.padding(horizontal = 10.dp)
+                    .shadow(30.dp)
                     .clip(RoundedCornerShape(20.dp))
                     // COLOR GREETING -------
-                    .background(Color.Red)
+                    .background(
+                        brush = Brush.linearGradient(
+                            colors = listOf(
+                                Color.Red,
+                                Color.Magenta,
+                                Color.Red
+                            )
+                        )
+                    )
             ) {
                 Greeting()
             }

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -23,9 +24,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.jyepezmusicapp.components.AlbumDetailImage
+import com.example.jyepezmusicapp.components.AlbumListCard
+import com.example.jyepezmusicapp.components.Reproductor
 import com.example.jyepezmusicapp.models.Album
 import com.example.jyepezmusicapp.services.AlbumService
 import com.example.jyepezmusicapp.ui.theme.HomeBackgroundGradiant
+import com.example.jyepezmusicapp.ui.theme.rubikTextStyles
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -36,7 +40,6 @@ fun AlbumDetailScreen(id: String, navController: NavController) {
     var album by remember {
         mutableStateOf<Album?>(null)
     }
-    // Variable para estado en lo que se consume la API
     var loading by remember {
         mutableStateOf(true)
     }
@@ -65,7 +68,7 @@ fun AlbumDetailScreen(id: String, navController: NavController) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Blue),
+                .background(HomeBackgroundGradiant),
             contentAlignment = Alignment.Center
         ) {
             CircularProgressIndicator()
@@ -86,6 +89,87 @@ fun AlbumDetailScreen(id: String, navController: NavController) {
                     .weight(3f)
             ) {
                 AlbumDetailImage(album, navController)
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            vertical = 15.dp
+                        )
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(Color.White)
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .padding(
+                                start = 15.dp,
+                                top = 12.dp,
+                                end = 15.dp,
+                                bottom = 5.dp
+                            ),
+                        text = "About this album...",
+                        style = rubikTextStyles.aboutThis
+                    )
+                    Text(
+                        modifier = Modifier
+                            .padding(
+                                start = 15.dp,
+                                end = 15.dp,
+                                bottom = 12.dp
+                            ),
+                        text = album?.description?:"",
+                        style = rubikTextStyles.description
+                    )
+                }
+                Row (
+                    modifier = Modifier
+                        //.fillMaxWidth()
+                        .padding(
+                            bottom = 20.dp
+                        )
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(Color.White)
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .padding(
+                                start = 15.dp,
+                                top = 12.dp,
+                                bottom = 12.dp
+                            ),
+                        text = "Artist:",
+                        style = rubikTextStyles.aboutThis
+                    )
+                    Text(
+                        modifier = Modifier
+                            .padding(
+                                start = 5.dp,
+                                top = 12.dp,
+                                end = 15.dp,
+                                bottom = 12.dp
+                            ),
+                        text = album?.artist?:"",
+                        style = rubikTextStyles.description
+                    )
+                }
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Column {
+                        //SI NO ES NULLEABLE
+                        album?.let { safeAlbum ->
+                            AlbumListCard(album = safeAlbum)
+                        }
+                    }
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                    ) {
+                        album?.let { safeAlbum ->
+                            Reproductor(album = safeAlbum)
+                        }
+                    }
+                }
             }
         }
     }
